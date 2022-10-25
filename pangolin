@@ -1,0 +1,73 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+#
+import upy
+HELP = '''
+------------------------------------------------------------------------------
+  Name     : pangoin - INF
+  Purpose  : ETL
+  Author   : Adam, LLC
+
+  Revisions:
+  Ver        Date        Author           Description
+  ---------  ----------  ---------------  ------------------------------------
+  1.0        2020/11/15  Adam             Create
+  1.88       2022/07/18  Adam             pet, ppy --> pet2
+  1.9        2022/09/18  Adam             Add pup2
+
+format:
+    app = pet/pet2/pup/pup2
+------------------------------------------------------------------------------
+'''
+
+
+def pangoin():
+
+    import sys
+    import usys
+
+    d_val = {'type':'pangolin'}
+
+    # get dict from command parameter
+    d_cp_info = usys.cp(1, HELP)
+
+    ETL_TYPE = d_cp_info.get('app', '').lower()
+    if not ETL_TYPE:
+        print(HELP)
+        sys.exit(1)
+
+    d_res = {}
+    if ETL_TYPE == 'pet2':
+        sys.path.append("pet")
+        from pet2 import etl_py
+
+    elif ETL_TYPE == 'pet':
+        sys.path.append("pet")
+        from pet import etl_py
+
+    elif ETL_TYPE == 'pup':
+        sys.path.append("pup")
+        from pup import etl_py
+
+    elif ETL_TYPE == 'pup2':
+        sys.path.append("pup")
+        from pup2 import etl_py
+
+    else:
+        print(HELP)
+        sys.exit(1)
+
+    d_res = etl_py(d_cp_info)
+
+    if d_res:
+        d_val['data'] = d_res
+
+    return d_val
+
+
+if __name__ == "__main__":
+    import ucgi
+
+    d_res = pangoin()
+    print(d_res)
+    rs = ucgi.ulog(d_res)

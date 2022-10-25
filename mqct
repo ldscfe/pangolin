@@ -1,0 +1,49 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+#
+import upy
+HELP = '''
+------------------------------------------------------------------------------
+  Name     : mqct
+  Purpose  : MQ Connection Test
+  Author   : Adam
+
+  Revisions:
+  Ver        Date        Author           Description
+  ---------  ----------  ---------------  ------------------------------------
+  1.0        2020/12/10  Adam             Create
+  1.2        2020/12/16  Adam             Parameter redefine
+
+format:
+  mqct mqname(in mq.ini) [TOPIC[.CMD]|[.{N}]]
+------------------------------------------------------------------------------
+'''
+
+
+## INIT
+if __name__ == "__main__":
+    import sys
+    import ustr
+    import umq
+    # Command Parameter
+    if len(sys.argv) < 2:
+        print(HELP)
+        sys.exit(1)
+
+    # Parameter --> Dict
+    s_conn_name = sys.argv[1]
+
+    d_mq_ini = ustr.ini2dict(s_conn_name, 'mq.ini')
+    if not d_mq_ini:
+        d_return = {'type': 'connection-mq', 'result': 1, 'code': '9000', 'message': 'No section: %s' % s_conn_name}
+        print(d_return)
+        sys.exit(1)
+    
+    # 
+    d_mq_ini['cmd'] = ''
+    if len(sys.argv) > 2:
+        s_cmd = sys.argv[2]
+        d_mq_ini['cmd'] = s_cmd
+
+    res = umq.mqconnping(d_mq_ini)
+    print(res)

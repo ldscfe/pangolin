@@ -1,0 +1,23 @@
+#!/bin/bash
+if (( $# >= 1 )); then
+    CMD=$1
+else
+    echo $0 'CMD' [N=0]
+    exit 1
+fi
+
+# 
+if (( $# >= 2 )); then
+   $CMD
+   for (( i=1; i<=${2}; i++ ))
+   do
+      CMD=${CMD% *}
+   done
+fi
+
+
+while :
+do
+   $CMD
+   sleep 1
+done

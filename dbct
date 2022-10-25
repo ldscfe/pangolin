@@ -1,0 +1,50 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+#
+import upy
+HELP = '''
+------------------------------------------------------------------------------
+  Name     : dbct
+  Purpose  : DB Connection Test
+  Author   : LLC
+
+  Revisions:
+  Ver        Date        Author           Description
+  ---------  ----------  ---------------  ------------------------------------
+  1.0        2020/05/19  LLC              Create
+  1.2        2020/11/18  LLC              Add SQL
+  1.5        2021/07/06  LLC              M02 : db string
+  1.6        2021/08/10  LLC              M03 : get CP(Command Parameter) from usys
+
+format:
+  dbct dbname(in db.ini) [SQL] [LINE=1] PRE=2
+------------------------------------------------------------------------------
+'''
+
+## INIT
+if __name__ == "__main__":
+    import sys
+    import usys
+    import udb
+    import ustr
+
+    # Command Parameter
+    d_cp = usys.cp(1, HELP)
+
+    d_para = {'db':'', 'sql':'', 'line':1}
+
+    s_db = d_cp.get('db', d_cp.get(1, ''))
+    if len(s_db) > 20:                                     # M02 : db string
+        d_para['db'] = ustr.udict(s_db.replace(';', ',').replace('=', ':'))
+    else:
+        # DB Parameter --> Dict
+        d_para['db'] = ustr.ini2dict(s_db)
+
+    d_para['sql'] = d_cp.get('sql', d_cp.get(2, ''))
+    d_para['line'] = ustr.str2num(d_cp.get('n', d_cp.get(3, '')))
+    PRE = ustr.str2num(d_cp.get('pre', d_cp.get(4, '2')))
+
+
+    # DB cursor
+    res = udb.dbconnping(d_para, PRE)
+    print(res)

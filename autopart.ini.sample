@@ -1,0 +1,5 @@
+partition by list (REPORT_PARTITION)
+(
+  partition PART2 values ('2'),
+  partition PART7 values ('7')
+);
