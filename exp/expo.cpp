@@ -25,6 +25,16 @@ format:
   yesterday         yyyymmdd, now-1
   now-N             yyyymmdd
 
+ -- supported column data type
+ (1)  : VARCHAR2/VARCHAR/NVARCHAR/NVARCHAR2
+        CHAR(96)/RAW(23)
+ (2)  : NUMBER/FLOAT
+ (12) : DATE(12)
+ (112): CLOB
+ -- Unsupported column data type
+ TIMESTAMP(0)/TIMESTAMP(6)/TIMESTAMP(7)/TIMESTAMP(9)
+ -- Stream buffer size can't be > 1 in this case
+ BLOB、LONG
 ******************************************************************************
 */
 #include <iostream>
