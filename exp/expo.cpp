@@ -16,7 +16,7 @@ format:
   ds                source file (from db.ini)
   s                 source file (regular expression: *)
   pr                [2] passwd PRE
-  header            [0] export column name
+  header            [0] not export column name
   datenull          [] if source data's date colunm is NULL, set datenull
   intnull           [] if source data's numrice colunm is NULL, set intnull
   --
