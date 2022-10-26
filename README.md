@@ -1,6 +1,6 @@
 # Pangolin - ETL Tools
 ##
-##    v1.92
+##    v1.95
 ##    @2018-2022
 ##
 #### 20210824  Adam        v1.8  - Patch, MySQL Connect.
