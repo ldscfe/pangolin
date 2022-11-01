@@ -73,11 +73,7 @@ using ldur::udebug;
 using ldur::getTime;
 using ldur::updateTimeVar;
 
-
 LDURMAP ump;                            //db info, etl info
-//unsigned int gi_counts;                 //result counts
-
-
 
 // datetime --> string: yyyy-mm-dd hh24:mi:ss
 string s_dt(otl_datetime od1)
