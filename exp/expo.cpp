@@ -19,22 +19,20 @@ format:
   header            [0] not export column name
   datenull          [] if source data's date colunm is NULL, set datenull
   intnull           [] if source data's numrice colunm is NULL, set intnull
-  --
-  debug             [0] output level, 0-9
-  -- s Variable:
-  yesterday         yyyymmdd, now-1
-  now-N             yyyymmdd
 
- -- supported column data type
- (1)  : VARCHAR2/VARCHAR/NVARCHAR/NVARCHAR2
-        CHAR(96)/RAW(23)
- (2)  : NUMBER/FLOAT
- (12) : DATE(12)
- (112): CLOB
- -- Unsupported column data type
- TIMESTAMP(0)/TIMESTAMP(6)/TIMESTAMP(7)/TIMESTAMP(9)
- -- Stream buffer size can't be > 1 in this case
- BLOB、LONG
+  -- s Variable:
+     yesterday         yyyymmdd, now-1
+     now-N             yyyymmdd
+  -- supported column data type
+     (1)  : VARCHAR2/VARCHAR/NVARCHAR/NVARCHAR2
+            CHAR(96)/RAW(23)
+     (2)  : NUMBER/FLOAT
+     (12) : DATE(12)
+     (112): CLOB
+  -- Unsupported column data type
+     TIMESTAMP(0)/TIMESTAMP(6)/TIMESTAMP(7)/TIMESTAMP(9)
+  -- Stream buffer size can't be > 1 in this case
+     BLOB、LONG
 ******************************************************************************
 */
 #include <iostream>
@@ -73,38 +71,13 @@ using ldur::pid;
 using ldur::udebug;
 //from time
 using ldur::getTime;
+using ldur::updateTimeVar;
 
 
 LDURMAP ump;                            //db info, etl info
-unsigned int gi_counts;                 //result counts
+//unsigned int gi_counts;                 //result counts
 
 
-// update string date variable
-// now = yyyymmdd
-// yesterday(now-1), now-2, ...
-string updateTimeVar(string& str1)
-{
-   string s1, s2, t1;
-   long n1;
-   for (int i=0; i<10; i++)
-   {
-      s1 = strInstr(str1, "%", 2);
-      if (s1 == "")
-          break;
-
-      t1 = strInstr(s1, "-", 1);
-      n1 = atoi(strInstr(s1, "-", 2).c_str());
-      if (t1 == "yesterday")
-           n1 = getTime((n1+1)*24*3600);
-      else if (t1 == "now")
-           n1 = getTime(n1*24*3600);
-      s2 = num2str(n1);
-
-      str1 = strRep(str1, "%" + s1 + "%", s2.substr(0,8));
-
-   }
-   return str1;
-}
 
 // datetime --> string: yyyy-mm-dd hh24:mi:ss
 string s_dt(otl_datetime od1)
