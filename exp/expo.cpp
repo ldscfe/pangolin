@@ -93,16 +93,20 @@ string s_dt(otl_datetime od1)
 }
 
 //Get Base Info From db.ini
-int get_db_info(const string& file, const string& ini_group, const int pre=2)
+int get_db_info(const string& file, const string& ini_group, const unsigned int pre=2)
 {
    LDURINI uini1;
    uini1.set(file);
+   string strTmp;
 
    //ump.init();
    ump.set("t_type", lower(uini1.get(ini_group, "type")));
    ump.set("t_host", uini1.get(ini_group, "host"));
    ump.set("t_user", uini1.get(ini_group, "user"));
-   ump.set("t_passwd", ldur::decrypt(uini1.get(ini_group, "passwd")).substr(pre));
+   strTmp = ldur::decrypt(uini1.get(ini_group, "passwd"));
+   if (strTmp.length() > pre)
+      strTmp = strTmp.substr(pre);
+   ump.set("t_passwd", strTmp);
    ump.set("t_port", uini1.get(ini_group, "port"));
    ump.set("t_db", uini1.get(ini_group, "db"));
    ump.set("memo", "");
@@ -170,6 +174,8 @@ int main( int argc, const char* argv[] )
 
    // INI --> Base DB Info
    i = get_db_info( "db.ini", s_ds, PR);    //--> b_:ype, host, port, user, passwd, db, code
+
+//cout << "get_db_info: " << i << endl;
 
 // debug
 /*
@@ -320,5 +326,3 @@ for (i=0;i<COLS;i++)
 
    return 0;
 }
-
-
