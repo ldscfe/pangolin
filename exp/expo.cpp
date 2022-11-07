@@ -55,6 +55,8 @@ using ldur::strRep;
 using ldur::strInstr;
 using ldur::strInstrRemain;
 using ldur::num2str;
+using ldur::str2csv;
+
 //from map
 using ldur::LDURMAP;
 
@@ -88,17 +90,6 @@ string s_dt(otl_datetime od1)
       res = "";
    
    return res;
-}
-
-// string --> csv format
-// return the converted string, the original string is also changed.
-string s_csv(string& str1, const string& delimiter=",")
-{
-   if ( strstr(str1.c_str(), "\"") || strstr(str1.c_str(), "\r") || strstr(str1.c_str(), "\n")  || strstr(str1.c_str(), delimiter.c_str()) ) {
-      str1 = strRep(str1, "\"", "\"\"");
-      str1 = "\"" + str1 + "\"";
-   }
-   return str1;
 }
 
 //Get Base Info From db.ini
@@ -266,12 +257,12 @@ for (i=0;i<COLS;i++)
                   strTmp = "";
                   for (j=0;j<lsTmp.len();j++)
                      strTmp += lsTmp[j];
-                  cout << s_csv(strTmp) << s_endl;
+                  cout << str2csv(strTmp) << s_endl;
                   break;
                default:   // varchar
                   dbin.rs >> charTmp;
                   strTmp = charTmp;
-                  cout << s_csv(strTmp) << s_endl;
+                  cout << str2csv(strTmp) << s_endl;
                   break;
             }
          }
@@ -299,12 +290,12 @@ for (i=0;i<COLS;i++)
                   strTmp = "";
                   for (j=0;j<lsTmp.len();j++)
                      strTmp += lsTmp[j];
-                  cout << s_csv(strTmp) << s_endl;
+                  cout << str2csv(strTmp) << s_endl;
                   break;
                default:   // varchar
                   dbin.rs >> charTmp;
                   strTmp = charTmp;
-                  cout << s_csv(strTmp) << s_endl;
+                  cout << str2csv(strTmp) << s_endl;
                   break;
             }
          n_res++;
