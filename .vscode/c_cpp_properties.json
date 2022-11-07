@@ -1,0 +1,51 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "/Users/adamlee/Library/CloudStorage/OneDrive-个人/develop/notepad/GitHub/ldscfe/udefcp/**"
+            ],
+            "defines": [],
+            "macFrameworkPath": [
+                "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
+            ],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "intelliSenseMode": "macos-clang-x64",
+            "compilerArgs": [
+                "-pthread",
+                "-std=c++11",
+                "-I/Users/adamlee/Library/CloudStorage/OneDrive-个人/develop/notepad/GitHub/ldscfe/udefcp/**"
+            ],
+            "mergeConfigurations": false,
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/**",
+                    "/Users/adamlee/Library/CloudStorage/OneDrive-个人/develop/notepad/GitHub/ldscfe/udefcp/**"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
+        },
+        {
+            "name": "udefcp",
+            "includePath": [
+                "/Users/adamlee/Library/CloudStorage/OneDrive-个人/develop/notepad/GitHub/ldscfe/udefcp/**"
+            ],
+            "defines": [],
+            "macFrameworkPath": [
+                "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
+            ],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "macos-clang-x64",
+            "compilerArgs": [
+                "-pthread",
+                "-std=c++11",
+                "-I/Users/adamlee/Library/CloudStorage/OneDrive-个人/develop/notepad/GitHub/ldscfe/udefcp"
+            ]
+        }
+    ],
+    "version": 4
+}
